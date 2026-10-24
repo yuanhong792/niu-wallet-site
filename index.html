@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>牛币钱包 NIU Wallet · 牛链桌面钱包与独立链源码</title>
+<meta name="description" content="牛链（NIU）桌面钱包，Windows x64 与 macOS Apple Silicon 双端接入同一条网络。Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。">
+<meta name="theme-color" content="#b8860b">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="牛币钱包 NIU Wallet">
+<meta property="og:description" content="牛链桌面钱包与 PoW/EVM 独立链源码。GPL-3.0 开源，未经第三方安全审计。">
+<meta property="og:image" content="logo.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top">
+      <img src="logo.png" alt="NIU 金币标志" width="34" height="34">
+      <span class="brand-name">牛币钱包 <span class="brand-sub">NIU&nbsp;Wallet</span></span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <a href="#features"><span class="zh">功能</span><span class="en">Features</span></a>
+      <a href="#network"><span class="zh">网络</span><span class="en">Network</span></a>
+      <a href="#screens"><span class="zh">界面</span><span class="en">Interface</span></a>
+      <a href="#security"><span class="zh">安全状态</span><span class="en">Security</span></a>
+      <a href="#download"><span class="zh">下载</span><span class="en">Download</span></a>
+      <a href="#source"><span class="zh">源码</span><span class="en">Source</span></a>
+    </nav>
+    <div class="topbar-actions">
+      <button id="langBtn" class="lang-btn" type="button" aria-label="切换语言">EN</button>
+      <a class="btn btn-ghost btn-sm" href="https://github.com/yuanhong792/niu-wallet" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="badge-row">
+        <span class="badge badge-gold">v0.3.10</span>
+        <span class="badge"><span class="zh">2026-10-22 发布</span><span class="en">Released 2026-10-22</span></span>
+        <span class="badge badge-outline"><span class="zh">GPL-3.0 开源</span><span class="en">GPL-3.0 open source</span></span>
+      </p>
+      <h1><span class="zh">牛链 NIU 桌面钱包<br>与独立链全量源码</span><span class="en">The NIU chain desktop wallet<br>and its full node source</span></h1>
+      <p class="lede">
+        <span class="zh">Windows x64 与 macOS Apple Silicon 双端使用同一套 Electron 界面与钱包业务代码，接入同一条 Ethash PoW + London EVM 独立网络。节点、钱包、合约模板与测试全部公开在 GitHub。</span>
+        <span class="en">Windows x64 and macOS Apple Silicon share one Electron interface and one wallet codebase, both connected to the same standalone Ethash PoW + London EVM network. The node, wallet, contract templates and tests are all public on GitHub.</span>
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#download">
+          <span class="zh">下载 v0.3.10</span><span class="en">Download v0.3.10</span>
+        </a>
+        <a class="btn btn-line" href="https://github.com/yuanhong792/niu-wallet" rel="noopener">
+          <span class="zh">查看源码</span><span class="en">Browse source</span>
+        </a>
+      </div>
+      <p class="hero-note">
+        <span class="zh">⚠ 当前版本未经独立第三方安全审计，Windows 包未做商业代码签名，macOS 包仅临时签名。请先阅读<a href="#security">安全状态</a>。</span>
+        <span class="en">⚠ Not independently security-audited. The Windows build is unsigned and the macOS build is ad-hoc signed only. Read the <a href="#security">security status</a> first.</span>
+      </p>
+    </div>
+    <div class="hero-visual">
+      <div class="shot-frame">
+        <img src="screen-overview.png" alt="牛币钱包概览界面：总余额、区块高度、我的地址与最近交易" width="1000" height="664" loading="eager">
+      </div>
+      <p class="shot-caption"><span class="zh">概览页截图使用公开演示数据，不含真实地址与余额。</span><span class="en">Screenshot uses public demo data, no real addresses or balances.</span></p>
+    </div>
+  </div>
+  <div class="wrap stats">
+    <div class="stat"><span class="stat-k"><span class="zh">Chain ID</span><span class="en">Chain ID</span></span><span class="stat-v">26261017</span></div>
+    <div class="stat"><span class="stat-k"><span class="zh">初始出块奖励</span><span class="en">Initial block reward</span></span><span class="stat-v">1000 NIU</span></div>
+    <div class="stat"><span class="stat-k"><span class="zh">减半周期</span><span class="en">Halving interval</span></span><span class="stat-v">1,050,000</span></div>
+    <div class="stat"><span class="stat-k"><span class="zh">发行上限</span><span class="en">Supply cap</span></span><span class="stat-v">&lt; 2,100,000,000</span></div>
+    <div class="stat"><span class="stat-k"><span class="zh">共识</span><span class="en">Consensus</span></span><span class="stat-v">Ethash PoW</span></div>
+  </div>
+</section>
+
+<section class="band" id="features">
+  <div class="wrap">
+    <h2><span class="zh">当前功能</span><span class="en">What it does today</span></h2>
+    <p class="section-lede"><span class="zh">以下均为 v0.3.10 已实现并通过自动化回归测试的功能，不含路线图承诺。</span><span class="en">Everything below ships in v0.3.10 and passes automated regression tests. Nothing here is a roadmap promise.</span></p>
+    <div class="grid grid-3">
+      <article class="card">
+        <h3><span class="zh">钱包基本操作</span><span class="en">Core wallet</span></h3>
+        <p><span class="zh">概览查看总余额、区块高度与节点连接状态；选择付款地址发送 NIU；接收页生成地址二维码；交易记录可展开完整链上字段。</span><span class="en">Overview shows balance, block height and node status. Send NIU from a chosen address, receive with a QR code, and expand full on-chain fields for any transaction.</span></p>
+      </article>
+      <article class="card">
+        <h3><span class="zh">ERC-20 代币</span><span class="en">ERC-20 tokens</span></h3>
+        <p><span class="zh">一键发行固定总量或带上限的管理型 ERC-20，支持导入、查看余额和转账。交易列表自动解析 <code>transfer</code> / <code>transferFrom</code> 的真实数量与符号。</span><span class="en">Issue a fixed-supply or capped managed ERC-20 in one click, then import, check balances and transfer. The transaction list resolves real amounts and symbols from <code>transfer</code> / <code>transferFrom</code>.</span></p>
+      </article>
+      <article class="card">
+        <h3><span class="zh">Solidity 工作台</span><span class="en">Solidity studio</span></h3>
+        <p><span class="zh">在钱包内编辑、编译 London EVM 合约、估算 Gas 并部署，支持导入 ABI 对已保存合约执行只读或签名写入调用。</span><span class="en">Edit, compile for London EVM, estimate Gas and deploy from inside the wallet. Import an ABI to run read calls or signed writes on saved contracts.</span></p>
+      </article>
+      <article class="card">
+        <h3><span class="zh">本机 PoW 挖矿</span><span class="en">Local PoW mining</span></h3>
+        <p><span class="zh">在钱包中主动开启或停止 Ethash 挖矿，实时查看出块与算力状态。难度沿用 EIP-100 形状、42 秒时间桶并禁用难度炸弹。</span><span class="en">Start or stop Ethash mining from the wallet and watch blocks and hashrate. Difficulty follows the EIP-100 shape with a 42-second bucket and the difficulty bomb disabled.</span></p>
+      </article>
+      <article class="card">
+        <h3><span class="zh">备份与恢复</span><span class="en">Backup &amp; restore</span></h3>
+        <p><span class="zh">导出带独立密码的可携带 JSON 备份（ethers V3 keystore，scrypt + AES-128-CTR），导入时明确区分钱包口令与备份密码。项目方无法找回丢失的备份密码。</span><span class="en">Export a portable JSON backup with its own password (ethers V3 keystore, scrypt + AES-128-CTR). Import distinguishes the wallet passphrase from the backup password. Lost backup passwords cannot be recovered by anyone else.</span></p>
+      </article>
+      <article class="card">
+        <h3><span class="zh">六语言界面</span><span class="en">Six interface languages</span></h3>
+        <p><span class="zh">简体中文、English、日本語、한국어、Español、Русский。macOS 与 Windows 共用同一实现与同一套文案。</span><span class="en">Simplified Chinese, English, Japanese, Korean, Spanish and Russian. macOS and Windows share one implementation and one string set.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="network">
+  <div class="wrap">
+    <h2><span class="zh">网络参数与共识边界</span><span class="en">Network parameters and consensus limits</span></h2>
+    <div class="grid grid-2">
+      <div>
+        <table class="params">
+          <tbody>
+            <tr><th><span class="zh">网络名称</span><span class="en">Network name</span></th><td><span class="zh">牛链网络（NIU）</span><span class="en">NIU Network</span></td></tr>
+            <tr><th>Chain ID / Network ID</th><td><button class="copy" data-copy="26261017">26261017</button></td></tr>
+            <tr><th><span class="zh">创世哈希</span><span class="en">Genesis hash</span></th><td><button class="copy copy-hash" data-copy="0x9590d27e9e5977eb00bf1fd794d93fce0cac22dad04dc3f25fc072ab0c87e053">0x9590d27e…0c87e053</button></td></tr>
+            <tr><th><span class="zh">初始区块奖励</span><span class="en">Initial block reward</span></th><td>1000 NIU</td></tr>
+            <tr><th><span class="zh">减半周期</span><span class="en">Halving interval</span></th><td><span class="zh">每 1,050,000 个区块</span><span class="en">every 1,050,000 blocks</span></td></tr>
+            <tr><th><span class="zh">小数位</span><span class="en">Decimals</span></th><td>18</td></tr>
+            <tr><th><span class="zh">叔块</span><span class="en">Uncles</span></th><td><span class="zh">无叔块及叔块奖励</span><span class="en">none, no uncle reward</span></td></tr>
+            <tr><th><span class="zh">创世分配</span><span class="en">Genesis allocation</span></th><td><span class="zh">零预挖分配</span><span class="en">zero pre-mine</span></td></tr>
+            <tr><th>EVM</th><td>London / Solidity</td></tr>
+            <tr><th><span class="zh">节点基线</span><span class="en">Node baseline</span></th><td>Core-Geth v1.12.23</td></tr>
+          </tbody>
+        </table>
+        <p class="fine"><span class="zh">节点起始提交 <code>96b2afc25c7023bb500d14e8ed69455339b1ca90</code>，保留上游版权与许可证。</span><span class="en">Node starts from commit <code>96b2afc25c7023bb500d14e8ed69455339b1ca90</code>, retaining upstream copyright and license.</span></p>
+      </div>
+      <div>
+        <h3 class="sub-h"><span class="zh">这些数字意味着什么</span><span class="en">What these numbers mean</span></h3>
+        <ul class="ticks">
+          <li><span class="zh">整数舍入后的基础发行总额小于 21 亿 NIU，全部来自挖矿，没有创世预分配。</span><span class="en">Total base issuance after integer rounding is below 2.1 billion NIU, all from mining, with no genesis pre-allocation.</span></li>
+          <li><span class="zh">目标平均出块约 60 秒，但这不是固定 60 秒的承诺：算力骤变、时间戳操纵、深度重组和长期运行仍需要更多独立验证。</span><span class="en">Average block time targets about 60 seconds, but that is not a fixed-60s guarantee. Hashrate shocks, timestamp manipulation, deep reorgs and long-run behaviour still need independent verification.</span></li>
+          <li><span class="zh">钱包在本机运行节点并把链数据保存在用户目录，默认连接项目配置的共享节点，同步的是同一条网络历史。</span><span class="en">The wallet runs a local node and stores chain data in your user directory, connecting to project-configured peers by default so it syncs the same chain history.</span></li>
+          <li><span class="zh">只有连接到相同 Chain ID、创世哈希与共识规则的节点，余额和已挖区块才会在不同电脑上得到一致结果。</span><span class="en">Balances and mined blocks only agree across machines when nodes share the same Chain ID, genesis hash and consensus rules.</span></li>
+          <li class="cross"><span class="zh">当前不是抗量子链。</span><span class="en">This is not a post-quantum chain.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="screens">
+  <div class="wrap">
+    <h2><span class="zh">界面</span><span class="en">Interface</span></h2>
+    <p class="section-lede"><span class="zh">v0.3.10 实际截图。全部使用公开演示数据生成，不包含真实用户地址、余额或备份资料。</span><span class="en">Real v0.3.10 screenshots, generated with public demo data — no real addresses, balances or backup material.</span></p>
+    <div class="grid grid-3 shot-grid">
+      <figure class="shot"><img src="screen-receive.png" alt="接收页：收款地址与二维码" width="1000" height="664" loading="lazy"><figcaption><span class="zh">接收 · 地址与二维码</span><span class="en">Receive · address and QR</span></figcaption></figure>
+      <figure class="shot"><img src="screen-send.png" alt="发送页：选择付款地址、填写收款地址和金额" width="1000" height="664" loading="lazy"><figcaption><span class="zh">发送 · 选择付款地址</span><span class="en">Send · pick a source address</span></figcaption></figure>
+      <figure class="shot"><img src="screen-transactions.png" alt="交易明细：链上字段与 ERC-20 解析结果" width="1000" height="664" loading="lazy"><figcaption><span class="zh">交易明细 · ERC-20 解析</span><span class="en">Details · ERC-20 resolution</span></figcaption></figure>
+      <figure class="shot"><img src="screen-token.png" alt="一键发行 ERC-20 代币页面" width="1000" height="664" loading="lazy"><figcaption><span class="zh">一键发行 ERC-20</span><span class="en">One-click ERC-20 issuance</span></figcaption></figure>
+      <figure class="shot"><img src="screen-solidity.png" alt="Solidity 编辑器：编译、ABI、Gas 预估与部署" width="1000" height="664" loading="lazy"><figcaption><span class="zh">Solidity 工作台</span><span class="en">Solidity studio</span></figcaption></figure>
+      <figure class="shot"><img src="screen-settings.png" alt="设置页：语言、备份导出与导入" width="1000" height="664" loading="lazy"><figcaption><span class="zh">设置 · 语言与备份</span><span class="en">Settings · language &amp; backup</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="security">
+  <div class="wrap">
+    <h2><span class="zh">安全状态</span><span class="en">Security status</span></h2>
+    <div class="alert alert-warn">
+      <strong><span class="zh">先说结论</span><span class="en">The short version</span></strong>
+      <p><span class="zh">当前版本未经独立第三方安全审计，不适合存放无法承受损失的资产。程序更新、系统故障、密码遗失、恶意软件和错误网络配置都可能造成资产无法使用。请保留多份离线备份，并先用小额测试恢复流程。</span><span class="en">This version has not been independently audited and is not suitable for assets you cannot afford to lose. App updates, system failures, lost passwords, malware and wrong network settings can all make funds unusable. Keep multiple offline backups and test recovery with a small amount first.</span></p>
+    </div>
+    <div class="grid grid-2">
+      <div class="panel">
+        <h3 class="sub-h ok"><span class="zh">已完成的保护与验证</span><span class="en">Done</span></h3>
+        <ul class="ticks">
+          <li><span class="zh">钱包请求校验 Host、Origin 和随机会话令牌；限制 JSON 类型、请求体大小、连接与读取时间；错误信息不回显请求中的秘密。</span><span class="en">Wallet requests validate Host, Origin and a random session token; JSON types, body size, connection and read times are limited; errors never echo secrets from the request.</span></li>
+          <li><span class="zh">RPC、矿工控制与钱包控制接口保持在本机回环地址；P2P 只按明确的网络配置连接节点。</span><span class="en">RPC, miner and wallet control interfaces stay on the loopback address; P2P connects only to explicitly configured peers.</span></li>
+          <li><span class="zh">签名类操作需要先解锁钱包，空闲约 5 分钟自动上锁，也可手动立即上锁。</span><span class="en">Signing operations require unlocking; the wallet auto-locks after about 5 minutes idle and can lock immediately.</span></li>
+          <li><span class="zh">可携带备份使用 ethers V3 keystore，导出后立即解密回读校验；导入前限制文件大小与 KDF 参数，拒绝错误密码、篡改密文、错误网络参数和危险覆盖。</span><span class="en">Portable backups use an ethers V3 keystore and are decrypted and re-read right after export. Import limits file size and KDF parameters, and rejects wrong passwords, tampered ciphertext, wrong network parameters and dangerous overwrites.</span></li>
+          <li><span class="zh">恢复测试在隔离数据目录中完成，不会覆盖正在使用的钱包。</span><span class="en">Recovery tests run in an isolated data directory and never overwrite a live wallet.</span></li>
+          <li><span class="zh">Solidity 编译器只允许读取固定安装的 OpenZeppelin 依赖，拒绝任意本机文件导入，并限制源码、参数、部署字节码和 EVM 运行时代码大小。</span><span class="en">The Solidity compiler may only read the pinned OpenZeppelin dependency, rejects arbitrary local file imports, and caps source, arguments, deployed bytecode and runtime code size.</span></li>
+          <li><span class="zh">ERC-20 显示同时校验标准 calldata 与已确认的 <code>Transfer</code> 日志；链上名称、符号和精度属于合约自报元数据，无法验证时在界面明确标记，不伪装成已验证代币。</span><span class="en">ERC-20 display checks both standard calldata and confirmed <code>Transfer</code> logs. On-chain name, symbol and decimals are contract-supplied metadata, marked explicitly when unverifiable rather than presented as verified.</span></li>
+          <li><span class="zh">v0.3.10 通过 25 项钱包回归测试与六语言静态覆盖检查，并保留真实双节点链上的 ERC-20 发行/转账与合约部署/读写验证。</span><span class="en">v0.3.10 passes 25 wallet regression tests and a six-language static coverage check, keeping real two-node ERC-20 issuance/transfer and contract deploy/read-write verification.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="panel">
+          <h3 class="sub-h warn"><span class="zh">尚未完成</span><span class="en">Not done</span></h3>
+          <ul class="crosses">
+            <li><span class="zh">未完成独立第三方安全审计。</span><span class="en">No independent third-party security audit.</span></li>
+            <li><span class="zh">未完成 Apple Developer ID 签名与公证，Windows 包未做商业代码签名。</span><span class="en">No Apple Developer ID signing or notarization; the Windows build is not commercially code-signed.</span></li>
+            <li><span class="zh">未完成更多实体电脑、不同网络环境下的长期同步与故障恢复验证。</span><span class="en">Long-run sync and failure recovery across more physical machines and networks is unverified.</span></li>
+            <li><span class="zh">未完成深度链重组、节点隔离、长期难度变化和异常时间戳的充分模拟。</span><span class="en">Deep reorgs, node isolation, long-term difficulty drift and abnormal timestamps are not adequately simulated.</span></li>
+            <li><span class="zh">未建立私密漏洞接收渠道或漏洞赏金计划。</span><span class="en">No private vulnerability disclosure channel or bug bounty.</span></li>
+            <li><span class="zh">Solidity 编辑器与内置合约模板未经独立智能合约安全审计。DEX、跨链桥、WalletConnect、ENS 与 NFT 图形化管理不在 v0.3.10 范围内。</span><span class="en">The Solidity editor and bundled contract templates are not independently audited. DEX, bridges, WalletConnect, ENS and NFT asset management are out of scope for v0.3.10.</span></li>
+            <li><span class="zh">构建依赖仍有 1 条 <code>sprintf-js</code> 中危记录，当前依赖链没有可直接升级的已修复版本。</span><span class="en">Build dependencies still carry one medium <code>sprintf-js</code> advisory with no directly upgradable fixed version in the current dependency chain.</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 class="sub-h"><span class="zh">本机保护的真实边界</span><span class="en">What local protection does not cover</span></h3>
+          <p class="fine"><span class="zh">Windows 本机钱包文件由 DPAPI CurrentUser 保护；macOS 使用 AES-256-GCM，主密钥保存在当前用户钥匙串。<strong>钱包口令是应用内门禁，不能抵御已经完全控制该系统账户、钥匙串或进程的攻击者。</strong>离开电脑时仍应锁定系统并保持操作系统更新。</span><span class="en">On Windows the local wallet file is protected by DPAPI CurrentUser; on macOS it uses AES-256-GCM with the key held in the current user's Keychain. <strong>The wallet passphrase is an in-app gate — it does not defend an attacker who already controls the OS account, Keychain or process.</strong> Lock your machine when you step away and keep the OS updated.</span></p>
+        </div>
+      </div>
+    </div>
+    <p class="fine"><span class="zh">扫描结果只能证明已知规则下未发现对应问题，不能证明不存在未知漏洞。源码公开、自动化测试和依赖扫描均不构成第三方安全背书。完整说明见仓库 <a href="https://github.com/yuanhong792/niu-wallet/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a>。</span><span class="en">Scan results only prove that no matching issue was found under known rules; they cannot prove unknown vulnerabilities are absent. Public source, automated tests and dependency scans are not third-party assurance. Full statement in the repo's <a href="https://github.com/yuanhong792/niu-wallet/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a>.</span></p>
+  </div>
+</section>
+
+<section class="band" id="download">
+  <div class="wrap">
+    <h2><span class="zh">下载</span><span class="en">Download</span></h2>
+    <p class="section-lede"><span class="zh">安装包直接托管在 GitHub Releases，本站不中转任何二进制文件。下载后请用同一页面的 <code>.sha256</code> 文件核对。</span><span class="en">Installers are hosted on GitHub Releases only — this site never mirrors binaries. Verify each download against its <code>.sha256</code> file on the same page.</span></p>
+    <div class="dl-grid">
+      <article class="dl-card">
+        <div class="dl-head">
+          <h3>Windows x64</h3>
+          <span class="badge badge-gold">v0.3.10</span>
+        </div>
+        <p class="dl-meta"><span class="zh">绿色压缩包，约 191 MB · 完整解压后运行 <code>NIU Wallet.exe</code>，不要只复制单个 EXE。</span><span class="en">Portable ZIP, about 191 MB · extract the whole archive and run <code>NIU Wallet.exe</code>; do not copy a single EXE.</span></p>
+        <div class="alert alert-warn alert-sm">
+          <p><span class="zh">未做商业代码签名。首次运行 Windows SmartScreen 可能提示「未知发布者」。</span><span class="en">Not commercially code-signed. SmartScreen may warn "unknown publisher" on first run.</span></p>
+        </div>
+        <a class="btn btn-primary btn-block" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-Windows-x64.zip" rel="noopener"><span class="zh">下载 ZIP</span><span class="en">Download ZIP</span></a>
+        <div class="hash">
+          <span class="hash-label">SHA-256</span>
+          <button class="copy copy-hash" data-copy="a7cb7cb8afda088b1e520ecd9f5693c13aa69ed254726e19a10c6d5886c74c61">a7cb7cb8…86c74c61</button>
+        </div>
+        <a class="txtlink" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-Windows-x64.zip.sha256" rel="noopener"><span class="zh">下载校验文件</span><span class="en">Get checksum file</span></a>
+      </article>
+
+      <article class="dl-card">
+        <div class="dl-head">
+          <h3>macOS <span class="zh">Apple Silicon</span><span class="en">Apple Silicon</span></h3>
+          <span class="badge badge-gold">v0.3.10</span>
+        </div>
+        <p class="dl-meta"><span class="zh">DMG 约 178 MB · 仅支持 Apple Silicon（arm64），拖入「应用程序」安装。</span><span class="en">DMG about 178 MB · Apple Silicon (arm64) only. Drag to Applications.</span></p>
+        <div class="alert alert-warn alert-sm">
+          <p><span class="zh">仅临时签名（ad-hoc），未使用 Apple Developer ID，未完成 Apple 公证。首次启动若被拦截，请在 Finder 中右键应用并选择「打开」。</span><span class="en">Ad-hoc signed only — no Apple Developer ID, no notarization. If macOS blocks first launch, right-click the app in Finder and choose Open.</span></p>
+        </div>
+        <a class="btn btn-primary btn-block" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-macOS-arm64.dmg" rel="noopener"><span class="zh">下载 DMG</span><span class="en">Download DMG</span></a>
+        <div class="hash">
+          <span class="hash-label">SHA-256</span>
+          <button class="copy copy-hash" data-copy="82dc093bb47e86a5609aa18db6a7e4c9baf2a14e3a49fb95a0479f6802201c9d">82dc093b…02201c9d</button>
+        </div>
+        <a class="txtlink" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-macOS-arm64.dmg.sha256" rel="noopener"><span class="zh">下载校验文件</span><span class="en">Get checksum file</span></a>
+      </article>
+    </div>
+
+    <details class="verify">
+      <summary><span class="zh">如何核对 SHA-256</span><span class="en">How to verify SHA-256</span></summary>
+      <p class="fine"><span class="zh">Windows PowerShell：</span><span class="en">Windows PowerShell:</span></p>
+      <pre><code>Get-FileHash .\NIU-Wallet-v0.3.10-Windows-x64.zip -Algorithm SHA256</code></pre>
+      <p class="fine"><span class="zh">macOS / Linux 终端：</span><span class="en">macOS / Linux terminal:</span></p>
+      <pre><code>shasum -a 256 NIU-Wallet-v0.3.10-macOS-arm64.dmg</code></pre>
+      <p class="fine"><span class="zh">输出应与上方哈希一致。macOS 校验文件中的路径前缀为 <code>dist-desktop/</code>，属发布脚本产物，文件名部分一致即可。</span><span class="en">The output must match the hash above. The macOS checksum file carries a <code>dist-desktop/</code> path prefix from the release script; match it by filename.</span></p>
+    </details>
+
+    <p class="fine"><span class="zh">历史版本与完整发布说明见 <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases 页面</a>（v0.3.9 · v0.3.8 · v0.3.10）。</span><span class="en">Older builds and full release notes are on the <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases page</a> (v0.3.8 · v0.3.9 · v0.3.10).</span></p>
+  </div>
+</section>
+
+<section class="band band-alt" id="source">
+  <div class="wrap">
+    <h2><span class="zh">源码与文档</span><span class="en">Source and docs</span></h2>
+    <div class="grid grid-2">
+      <div>
+        <p><span class="zh">钱包、定制节点、合约模板、构建脚本与安全测试证据全部在一个公开仓库里，以 GPL-3.0 授权。桌面端使用 Electron，节点基于 Core-Geth v1.12.23 定制。</span><span class="en">The wallet, the custom node, contract templates, build scripts and security-test evidence all live in one public repository under GPL-3.0. The desktop app is Electron; the node is a customized Core-Geth v1.12.23.</span></p>
+        <div class="cta-row">
+          <a class="btn btn-line" href="https://github.com/yuanhong792/niu-wallet" rel="noopener">GitHub<span class="zh"> 仓库</span><span class="en"> repo</span></a>
+          <a class="btn btn-line" href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener"><span class="zh">发布记录</span><span class="en">Releases</span></a>
+        </div>
+      </div>
+      <ul class="doclist">
+        <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/README.md" rel="noopener"><span class="zh">README · 安装与功能说明</span><span class="en">README · install and features</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/SECURITY.md" rel="noopener"><span class="zh">SECURITY · 安全状态与发布限制</span><span class="en">SECURITY · status and release limits</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/docs/%E7%89%9B%E9%93%BENIU%E7%99%BD%E7%9A%AE%E4%B9%A6V3.0.md" rel="noopener"><span class="zh">牛链 NIU 白皮书 V3.0</span><span class="en">NIU technical whitepaper V3.0</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/docs/%E7%89%9B%E9%93%BENIU%E7%99%BD%E7%9A%AE%E4%B9%A6V2.0.md" rel="noopener"><span class="zh">牛链 NIU 技术白皮书 V2.0</span><span class="en">NIU technical whitepaper V2.0</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/tree/main/contracts" rel="noopener"><span class="zh">合约模板 · NiuFixedToken / NiuManagedToken / NiuGuestbook</span><span class="en">Contract templates · NiuFixedToken / NiuManagedToken / NiuGuestbook</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2><span class="zh">风险提示</span><span class="en">Risk disclosure</span></h2>
+    <div class="alert alert-danger">
+      <ul class="crosses">
+        <li><span class="zh">牛币（NIU）是个人开源项目的实验性代币，由本机挖矿产生。项目方不作任何价值、收益或价格承诺，不承诺上架任何交易所。</span><span class="en">NIU is an experimental token from an individual open-source project, produced by local mining. The author makes no promise of value, return or price, and no promise of any exchange listing.</span></li>
+        <li><span class="zh">本项目未经独立第三方安全审计，源代码、自动化测试和依赖扫描均不构成安全背书。</span><span class="en">This project is not independently audited. Source code, automated tests and dependency scans do not constitute security assurance.</span></li>
+        <li><span class="zh">私钥一旦丢失或备份密码遗忘，资产无法找回。项目方无法为你找回任何密码或私钥。</span><span class="en">If a private key is lost or a backup password forgotten, the funds cannot be recovered. No one on this project can restore a password or key for you.</span></li>
+        <li><span class="zh">挖矿会占用本机算力与电力，并可能影响设备寿命；请在了解本地法规与税务要求后自行判断。</span><span class="en">Mining consumes local compute and electricity and may affect hardware life. Judge local legal and tax requirements yourself.</span></li>
+        <li><span class="zh">本页面不是投资要约，不构成任何投资建议。</span><span class="en">This page is not an offer, and nothing here is investment advice.</span></li>
+      </ul>
+    </div>
+    <p class="fine"><span class="zh">谨防仿冒：本项目只有 <code>github.com/yuanhong792/niu-wallet</code> 一个源码仓库，安装包只从该仓库的 Releases 下载。任何索要私钥、助记词或要求「转账解锁」的都是诈骗。</span><span class="en">Beware of fakes: <code>github.com/yuanhong792/niu-wallet</code> is the only source repository and its Releases page is the only download location. Anyone asking for your private key, seed phrase, or a "transfer to unlock" is running a scam.</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <img class="foot-logo" src="logo-64.png" alt="" width="40" height="40">
+      <p class="foot-name"><span class="zh">牛币钱包 · NIU Wallet</span><span class="en">NIU Wallet</span></p>
+      <p class="fine"><span class="zh">牛链网络 Chain ID 26261017 · 源码以 GPL-3.0 授权</span><span class="en">NIU Network Chain ID 26261017 · source under GPL-3.0</span></p>
+    </div>
+    <div>
+      <h4><span class="zh">项目</span><span class="en">Project</span></h4>
+      <ul>
+        <li><a href="https://github.com/yuanhong792/niu-wallet" rel="noopener">GitHub</a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener"><span class="zh">发布记录</span><span class="en">Releases</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/SECURITY.md" rel="noopener"><span class="zh">安全状态</span><span class="en">Security</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/issues" rel="noopener"><span class="zh">问题反馈</span><span class="en">Issues</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="zh">页面</span><span class="en">On this page</span></h4>
+      <ul>
+        <li><a href="#features"><span class="zh">当前功能</span><span class="en">Features</span></a></li>
+        <li><a href="#network"><span class="zh">网络参数</span><span class="en">Network</span></a></li>
+        <li><a href="#security"><span class="zh">安全状态</span><span class="en">Security status</span></a></li>
+        <li><a href="#download"><span class="zh">下载与校验</span><span class="en">Download</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <p class="fine"><span class="zh">© 2026 yuanhong792。本站为项目信息页，不托管安装包、不代持任何资产、不提供钱包服务，也不会以任何方式索要私钥或密码。</span><span class="en">© 2026 yuanhong792. This is an informational project page. It does not mirror installers, hold assets, or provide wallet services, and will never ask for a private key or password.</span></p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
