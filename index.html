@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>牛币钱包 NIU Wallet · 牛链桌面钱包与独立链源码</title>
-<meta name="description" content="牛链（NIU）桌面钱包，Windows x64 与 macOS Apple Silicon 双端接入同一条网络。Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。">
+<title>牛币钱包 NIU Wallet · 牛链桌面钱包、安卓钱包与独立链源码</title>
+<meta name="description" content="牛链（NIU）钱包：Windows x64、macOS Apple Silicon 桌面版与安卓手机版接入同一条网络。Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。">
 <meta name="theme-color" content="#b8860b">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="canonical" href="https://yuanhong792.github.io/niu-wallet-site/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="牛币钱包 NIU Wallet">
-<meta property="og:description" content="牛链桌面钱包与 PoW/EVM 独立链源码。GPL-3.0 开源，未经第三方安全审计。">
+<meta property="og:description" content="牛链桌面与安卓钱包、PoW/EVM 独立链源码。GPL-3.0 开源，未经第三方安全审计。">
 <meta property="og:url" content="https://yuanhong792.github.io/niu-wallet-site/">
 <meta property="og:image" content="https://yuanhong792.github.io/niu-wallet-site/logo.png">
 <link rel="stylesheet" href="site.css">
@@ -50,8 +50,8 @@
       </p>
       <h1><span class="zh">牛链 NIU 桌面钱包<br>与独立链全量源码</span><span class="en">The NIU chain desktop wallet<br>and its full node source</span></h1>
       <p class="lede">
-        <span class="zh">Windows x64 与 macOS Apple Silicon 双端使用同一套 Electron 界面与钱包业务代码，接入同一条 Ethash PoW + London EVM 独立网络。节点、钱包、合约模板与测试全部公开在 GitHub。</span>
-        <span class="en">Windows x64 and macOS Apple Silicon share one Electron interface and one wallet codebase, both connected to the same standalone Ethash PoW + London EVM network. The node, wallet, contract templates and tests are all public on GitHub.</span>
+        <span class="zh">Windows x64 与 macOS Apple Silicon 双端使用同一套 Electron 界面与钱包业务代码，接入同一条 Ethash PoW + London EVM 独立网络。节点、钱包、合约模板与测试全部公开在 GitHub。另有安卓手机版 v0.1.9：独立新钱包，手机内自带节点，以 APK 侧载安装。</span>
+        <span class="en">Windows x64 and macOS Apple Silicon share one Electron interface and one wallet codebase, both connected to the same standalone Ethash PoW + London EVM network. The node, wallet, contract templates and tests are all public on GitHub. An Android build (v0.1.9) is a separate new wallet that runs the node on the phone and installs from a side-loaded APK.</span>
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#download">
@@ -247,6 +247,23 @@
         </div>
         <a class="txtlink" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-macOS-arm64.dmg.sha256" rel="noopener"><span class="zh">下载校验文件</span><span class="en">Get checksum file</span></a>
       </article>
+
+      <article class="dl-card">
+        <div class="dl-head">
+          <h3>Android <span class="zh">手机版</span><span class="en">Mobile</span></h3>
+          <span class="badge badge-gold">v0.1.9</span>
+        </div>
+        <p class="dl-meta"><span class="zh">侧载 APK，约 22 MB · 仅 arm64-v8a，Android 8.0（API 26）及以上。节点直接跑在手机里。</span><span class="en">Side-loaded APK, about 22 MB · arm64-v8a only, Android 8.0 (API 26)+. The node runs on the phone itself.</span></p>
+        <div class="alert alert-warn alert-sm">
+          <p><span class="zh">不上架应用商店，安装时需允许「安装未知来源应用」。手机版是独立新钱包：只做收付、交易记录和 ERC-20 收发，不含挖矿、合约与发币，也不导入桌面版备份。备份请用「另存备份到手机文件」保存到自己的文件夹，卸载重装不会丢。</span><span class="en">Not distributed through any app store; allow "install unknown apps" when prompted. The mobile build is a separate new wallet: send/receive, history and ERC-20 transfers only — no mining, contracts or token issuance, and it does not import desktop backups. Save backups to a folder you own through the app's system save dialog; those files survive uninstalling the app.</span></p>
+        </div>
+        <a class="btn btn-primary btn-block" href="https://github.com/yuanhong792/niu-wallet/releases/download/android-v0.1.9/NIU-Wallet-Mobile-0.1.9.apk" rel="noopener"><span class="zh">下载 APK</span><span class="en">Download APK</span></a>
+        <div class="hash">
+          <span class="hash-label">SHA-256</span>
+          <button class="copy copy-hash" data-copy="95d767eda9998f8b970a94e654289bc35ec2d77b153300a7c6a6e0a5e5325b62">95d767ed…e5325b62</button>
+        </div>
+        <a class="txtlink" href="https://github.com/yuanhong792/niu-wallet/releases/download/android-v0.1.9/NIU-Wallet-Mobile-0.1.9.apk.sha256" rel="noopener"><span class="zh">下载校验文件</span><span class="en">Get checksum file</span></a>
+      </article>
     </div>
 
     <details class="verify">
@@ -255,10 +272,12 @@
       <pre><code>Get-FileHash .\NIU-Wallet-v0.3.10-Windows-x64.zip -Algorithm SHA256</code></pre>
       <p class="fine"><span class="zh">macOS / Linux 终端：</span><span class="en">macOS / Linux terminal:</span></p>
       <pre><code>shasum -a 256 NIU-Wallet-v0.3.10-macOS-arm64.dmg</code></pre>
+      <p class="fine"><span class="zh">安卓 APK（Windows PowerShell 用 <code>Get-FileHash .\NIU-Wallet-Mobile-0.1.9.apk -Algorithm SHA256</code>）：</span><span class="en">Android APK (on Windows PowerShell use <code>Get-FileHash .\NIU-Wallet-Mobile-0.1.9.apk -Algorithm SHA256</code>):</span></p>
+      <pre><code>shasum -a 256 NIU-Wallet-Mobile-0.1.9.apk</code></pre>
       <p class="fine"><span class="zh">输出应与上方哈希一致。macOS 校验文件中的路径前缀为 <code>dist-desktop/</code>，属发布脚本产物，文件名部分一致即可。</span><span class="en">The output must match the hash above. The macOS checksum file carries a <code>dist-desktop/</code> path prefix from the release script; match it by filename.</span></p>
     </details>
 
-    <p class="fine"><span class="zh">历史版本与完整发布说明见 <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases 页面</a>（v0.3.9 · v0.3.8 · v0.3.10）。</span><span class="en">Older builds and full release notes are on the <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases page</a> (v0.3.8 · v0.3.9 · v0.3.10).</span></p>
+    <p class="fine"><span class="zh">历史版本与完整发布说明见 <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases 页面</a>（桌面 v0.3.9 · v0.3.8 · v0.3.10；安卓 <code>android-v0.1.9</code>）。</span><span class="en">Older builds and full release notes are on the <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases page</a> (desktop v0.3.8 · v0.3.9 · v0.3.10; Android <code>android-v0.1.9</code>).</span></p>
   </div>
 </section>
 

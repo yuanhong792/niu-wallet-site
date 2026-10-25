@@ -149,7 +149,7 @@ ul{padding-left:20px;margin:0}
 .alert strong{display:block;margin-bottom:5px}
 
 /* download cards */
-.dl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-bottom:24px}
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-bottom:24px}
 .dl-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px}
 .dl-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
 .dl-meta{font-size:14.5px;color:var(--ink-2);min-height:2.9em}
