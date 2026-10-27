@@ -1,0 +1,16 @@
+# Keep LF in the repository and on checkout. Without this, a Windows working
+# copy with core.autocrlf=true turns a one-line edit into a whole-file CRLF
+# rewrite when the file is uploaded through the GitHub web UI.
+* text=auto eol=lf
+
+*.png    binary
+*.ico    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.webp   binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.zip    binary
+*.gz     binary
