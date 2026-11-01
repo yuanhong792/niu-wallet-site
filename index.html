@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>牛币钱包 NIU Wallet · 牛链桌面钱包、安卓钱包与独立链源码</title>
-<meta name="description" content="牛链（NIU）钱包：Windows x64、macOS Apple Silicon 桌面版与安卓手机版接入同一条网络。Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。">
+<meta name="description" content="牛币钱包 NIU Wallet v0.4.0：新增个人多链收发（BTC、DOGE、ETH、USDT、USDC 与 BTC 测试网、Sepolia），Windows x64、macOS Apple Silicon 与安卓手机版接入同一条 Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。">
 <meta name="theme-color" content="#b8860b">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="canonical" href="https://yuanhong792.github.io/niu-wallet-site/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="牛币钱包 NIU Wallet">
-<meta property="og:description" content="牛链桌面与安卓钱包、PoW/EVM 独立链源码。GPL-3.0 开源，未经第三方安全审计。">
+<meta property="og:title" content="牛币钱包 NIU Wallet v0.4.0">
+<meta property="og:description" content="v0.4.0 新增个人多链收发：BTC / DOGE / ETH / USDT / USDC + 两个测试网，能查余额也能真的转出去。GPL-3.0 开源，未经第三方安全审计。">
 <meta property="og:url" content="https://yuanhong792.github.io/niu-wallet-site/">
 <meta property="og:image" content="https://yuanhong792.github.io/niu-wallet-site/logo.png">
 <link rel="stylesheet" href="site.css">
@@ -25,6 +25,7 @@
     </a>
     <nav class="topnav" aria-label="主导航">
       <a href="#features"><span class="zh">功能</span><span class="en">Features</span></a>
+      <a href="#multichain"><span class="zh">多链</span><span class="en">Multichain</span></a>
       <a href="#network"><span class="zh">网络</span><span class="en">Network</span></a>
       <a href="#screens"><span class="zh">界面</span><span class="en">Interface</span></a>
       <a href="#security"><span class="zh">安全状态</span><span class="en">Security</span></a>
@@ -44,18 +45,18 @@
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="badge-row">
-        <span class="badge badge-gold">v0.3.10</span>
-        <span class="badge"><span class="zh">2026-10-22 发布</span><span class="en">Released 2026-10-22</span></span>
+        <span class="badge badge-gold">v0.4.0</span>
+        <span class="badge"><span class="zh">2026-11-01 发布</span><span class="en">Released 2026-11-01</span></span>
         <span class="badge badge-outline"><span class="zh">GPL-3.0 开源</span><span class="en">GPL-3.0 open source</span></span>
       </p>
       <h1><span class="zh">牛链 NIU 桌面钱包<br>与独立链全量源码</span><span class="en">The NIU chain desktop wallet<br>and its full node source</span></h1>
       <p class="lede">
-        <span class="zh">Windows x64 与 macOS Apple Silicon 双端使用同一套 Electron 界面与钱包业务代码，接入同一条 Ethash PoW + London EVM 独立网络。节点、钱包、合约模板与测试全部公开在 GitHub。另有安卓手机版 v0.1.9：独立新钱包，手机内自带节点，以 APK 侧载安装。</span>
-        <span class="en">Windows x64 and macOS Apple Silicon share one Electron interface and one wallet codebase, both connected to the same standalone Ethash PoW + London EVM network. The node, wallet, contract templates and tests are all public on GitHub. An Android build (v0.1.9) is a separate new wallet that runs the node on the phone and installs from a side-loaded APK.</span>
+        <span class="zh">v0.4.0 新增「个人多链收发」：BTC、DOGE、ETH、USDT、USDC 与 BTC 测试网、Sepolia 测试网共五个网络、八张币卡，能查余额也能真的转出去。Windows x64 与 macOS Apple Silicon 共用同一套 Electron 界面与钱包业务代码，接入同一条 Ethash PoW + London EVM 独立网络。节点、钱包、合约模板与测试全部公开在 GitHub。另有安卓手机版 v0.1.9，以 APK 侧载安装。</span>
+        <span class="en">v0.4.0 adds a personal multichain wallet: BTC, DOGE, ETH, USDT, USDC plus BTC testnet and Sepolia — five networks, eight coin cards, real sending, not just balances. Windows x64 and macOS Apple Silicon share one Electron interface and one wallet codebase, both connected to the same standalone Ethash PoW + London EVM network. The node, wallet, contract templates and tests are all public on GitHub. An Android build (v0.1.9) installs from a side-loaded APK.</span>
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#download">
-          <span class="zh">下载 v0.3.10</span><span class="en">Download v0.3.10</span>
+          <span class="zh">下载 v0.4.0</span><span class="en">Download v0.4.0</span>
         </a>
         <a class="btn btn-line" href="https://github.com/yuanhong792/niu-wallet" rel="noopener">
           <span class="zh">查看源码</span><span class="en">Browse source</span>
@@ -85,7 +86,7 @@
 <section class="band" id="features">
   <div class="wrap">
     <h2><span class="zh">当前功能</span><span class="en">What it does today</span></h2>
-    <p class="section-lede"><span class="zh">以下均为 v0.3.10 已实现并通过自动化回归测试的功能，不含路线图承诺。</span><span class="en">Everything below ships in v0.3.10 and passes automated regression tests. Nothing here is a roadmap promise.</span></p>
+    <p class="section-lede"><span class="zh">以下均为 v0.4.0 已实现并通过自动化回归测试的功能，不含路线图承诺。</span><span class="en">Everything below ships in v0.4.0 and passes automated regression tests. Nothing here is a roadmap promise.</span></p>
     <div class="grid grid-3">
       <article class="card">
         <h3><span class="zh">钱包基本操作</span><span class="en">Core wallet</span></h3>
@@ -115,7 +116,44 @@
   </div>
 </section>
 
-<section class="band band-alt" id="network">
+<section class="band band-alt" id="multichain">
+  <div class="wrap">
+    <h2><span class="zh">个人多链收发（v0.4.0 新增）</span><span class="en">Personal multichain wallet (new in v0.4.0)</span></h2>
+    <p class="section-lede"><span class="zh">五个网络、八张币卡，主网与测试网并列显示，一屏看清每种币在哪条链上。余额查询、收款地址、转出签名全部在本地完成。</span><span class="en">Five networks and eight coin cards, mainnet and testnet side by side. Balance queries, receive addresses and signing all happen locally.</span></p>
+    <div class="grid grid-2">
+      <div>
+        <table class="params">
+          <tbody>
+            <tr><th><span class="zh">网络</span><span class="en">Network</span></th><th><span class="zh">币种</span><span class="en">Coins</span></th><th><span class="zh">地址格式</span><span class="en">Address</span></th></tr>
+            <tr><td>Bitcoin</td><td>BTC</td><td><code>bc1…</code> P2WSH</td></tr>
+            <tr><td>Bitcoin <span class="zh">测试网</span><span class="en">testnet</span></td><td>tBTC</td><td><code>tb1…</code> P2WSH</td></tr>
+            <tr><td>Dogecoin</td><td>DOGE</td><td><code>D…</code> P2PKH</td></tr>
+            <tr><td>Ethereum</td><td>ETH · USDT · USDC</td><td><code>0x…</code> <span class="zh">三币共用</span><span class="en">shared by three</span></td></tr>
+            <tr><td>Sepolia <span class="zh">测试网</span><span class="en">testnet</span></td><td>SepETH</td><td><code>0x…</code> EVM</td></tr>
+          </tbody>
+        </table>
+        <p class="fine"><span class="zh">数据源：Blockstream Esplora（BTC / 测试网）、BlockCypher（DOGE）、PublicNode JSON-RPC（ETH / Sepolia）。以太坊是一个地址容纳该链所有代币，所以 ETH、USDT、USDC 共用一个地址是正常设计，不是错误。</span><span class="en">Data sources: Blockstream Esplora (BTC / testnet), BlockCypher (DOGE), PublicNode JSON-RPC (ETH / Sepolia). An EVM address holds every token on that chain, so ETH, USDT and USDC sharing one address is correct by design.</span></p>
+      </div>
+      <div>
+        <div class="panel">
+          <h3 class="sub-h ok"><span class="zh">能真的转出去</span><span class="en">Real sending, not just balances</span></h3>
+          <ul class="ticks">
+            <li><span class="zh">BTC 走 PSBT（bitcoinjs-lib 7.0.5），DOGE 走自定义链参数 P2PKH，ETH 走 EIP-1559 type=2。签名在本地完成，私钥不出内存。</span><span class="en">BTC uses PSBT (bitcoinjs-lib 7.0.5), DOGE uses P2PKH with custom chain parameters, ETH uses EIP-1559 type=2. Signing is local; the private key never leaves memory.</span></li>
+            <li><span class="zh">转出前有预览页，手续费、找零、总扣款逐项列出，确认后才签名广播。</span><span class="en">A preview page lists fee, change and total debit before anything is signed or broadcast.</span></li>
+            <li><span class="zh">每张卡独立容错：某个节点挂了只影响那一张卡，失败卡片写明原因，不会整页「未查询」。</span><span class="en">Per-card fault isolation: one dead node only affects its own card, which states the reason — never a whole page of "unqueried".</span></li>
+            <li><span class="zh">请求 30 秒超时，节点无响应会明确报错，不会永远卡在「正在处理」；广播后每 15 秒自动刷新确认状态。</span><span class="en">30-second request timeout, so a dead node reports an error instead of hanging forever; confirmation status refreshes every 15 seconds after broadcast.</span></li>
+            <li><span class="zh">个人保险库用 scrypt(N=131072, r=8, p=1) 派生密钥、AES-256-GCM 加密，AAD 绑定 <code>niu-personal-v1</code>；密码错误时认证失败直接拒绝。</span><span class="en">The personal vault derives keys with scrypt(N=131072, r=8, p=1) and encrypts with AES-256-GCM bound to the AAD <code>niu-personal-v1</code>; a wrong password fails authentication and is rejected.</span></li>
+          </ul>
+        </div>
+        <div class="alert alert-ok alert-sm">
+          <p><span class="zh">转出链路在 Sepolia 测试网真跑通过：交易 <a href="https://sepolia.etherscan.io/tx/0xce2f88654ed418c4bb5a62c1b2099b4b8ad615f2f4479a451d21575ca5926419" rel="noopener"><code>0xce2f8865…5926419</code></a>，区块 12039213，type=2，chainId=11155111，gasUsed 12000，实付 0.000000000000264 ETH。不是模拟数据。</span><span class="en">The send path was exercised on Sepolia for real: tx <a href="https://sepolia.etherscan.io/tx/0xce2f88654ed418c4bb5a62c1b2099b4b8ad615f2f4479a451d21575ca5926419" rel="noopener"><code>0xce2f8865…5926419</code></a>, block 12039213, type=2, chainId=11155111, gasUsed 12000, fee paid 0.000000000000264 ETH. Not simulated.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="network">
   <div class="wrap">
     <h2><span class="zh">网络参数与共识边界</span><span class="en">Network parameters and consensus limits</span></h2>
     <div class="grid grid-2">
@@ -150,10 +188,15 @@
   </div>
 </section>
 
-<section class="band" id="screens">
+<section class="band band-alt" id="screens">
   <div class="wrap">
     <h2><span class="zh">界面</span><span class="en">Interface</span></h2>
-    <p class="section-lede"><span class="zh">v0.3.10 实际截图。全部使用公开演示数据生成，不包含真实用户地址、余额或备份资料。</span><span class="en">Real v0.3.10 screenshots, generated with public demo data — no real addresses, balances or backup material.</span></p>
+    <p class="section-lede"><span class="zh">v0.4.0 实际截图。全部使用公开演示数据生成，不包含真实用户地址、余额或备份资料。</span><span class="en">Real v0.4.0 screenshots, generated with public demo data — no real addresses, balances or backup material.</span></p>
+    <div class="grid grid-2 shot-grid">
+      <figure class="shot"><img src="screen-personal.png" alt="个人多链页：BTC、DOGE、ETH、USDT、USDC 五张币卡与余额" width="1360" height="1000" loading="lazy"><figcaption><span class="zh">个人多链 · 主网币卡（v0.4.0 新增）</span><span class="en">Personal multichain · mainnet cards (new in v0.4.0)</span></figcaption></figure>
+      <figure class="shot"><img src="screen-personal-testnet.png" alt="个人多链页切换到测试网：Bitcoin 测试网与 Sepolia" width="1360" height="1000" loading="lazy"><figcaption><span class="zh">个人多链 · 测试网切换（v0.4.0 新增）</span><span class="en">Personal multichain · testnet view (new in v0.4.0)</span></figcaption></figure>
+    </div>
+    <p class="fine"><span class="zh">以下为牛链 NIU 钱包界面（v0.3.10 起保持一致）：</span><span class="en">Below: the NIU chain wallet screens, unchanged since v0.3.10:</span></p>
     <div class="grid grid-3 shot-grid">
       <figure class="shot"><img src="screen-receive.png" alt="接收页：收款地址与二维码" width="1000" height="664" loading="lazy"><figcaption><span class="zh">接收 · 地址与二维码</span><span class="en">Receive · address and QR</span></figcaption></figure>
       <figure class="shot"><img src="screen-send.png" alt="发送页：选择付款地址、填写收款地址和金额" width="1000" height="664" loading="lazy"><figcaption><span class="zh">发送 · 选择付款地址</span><span class="en">Send · pick a source address</span></figcaption></figure>
@@ -165,7 +208,7 @@
   </div>
 </section>
 
-<section class="band band-alt" id="security">
+<section class="band" id="security">
   <div class="wrap">
     <h2><span class="zh">安全状态</span><span class="en">Security status</span></h2>
     <div class="alert alert-warn">
@@ -183,7 +226,8 @@
           <li><span class="zh">恢复测试在隔离数据目录中完成，不会覆盖正在使用的钱包。</span><span class="en">Recovery tests run in an isolated data directory and never overwrite a live wallet.</span></li>
           <li><span class="zh">Solidity 编译器只允许读取固定安装的 OpenZeppelin 依赖，拒绝任意本机文件导入，并限制源码、参数、部署字节码和 EVM 运行时代码大小。</span><span class="en">The Solidity compiler may only read the pinned OpenZeppelin dependency, rejects arbitrary local file imports, and caps source, arguments, deployed bytecode and runtime code size.</span></li>
           <li><span class="zh">ERC-20 显示同时校验标准 calldata 与已确认的 <code>Transfer</code> 日志；链上名称、符号和精度属于合约自报元数据，无法验证时在界面明确标记，不伪装成已验证代币。</span><span class="en">ERC-20 display checks both standard calldata and confirmed <code>Transfer</code> logs. On-chain name, symbol and decimals are contract-supplied metadata, marked explicitly when unverifiable rather than presented as verified.</span></li>
-          <li><span class="zh">v0.3.10 通过 25 项钱包回归测试与六语言静态覆盖检查，并保留真实双节点链上的 ERC-20 发行/转账与合约部署/读写验证。</span><span class="en">v0.3.10 passes 25 wallet regression tests and a six-language static coverage check, keeping real two-node ERC-20 issuance/transfer and contract deploy/read-write verification.</span></li>
+          <li><span class="zh">v0.4.0 通过 34 项单元测试、3087 个文件的包一致性比对、25 项包内冒烟、56 项真实界面回归，并在 Sepolia 测试网完成真实收发；v0.3.10 保留 25 项钱包回归测试与六语言静态覆盖检查，以及真实双节点链上的 ERC-20 发行/转账与合约部署/读写验证。</span><span class="en">v0.4.0 passes 34 unit tests, a 3087-file package consistency diff, 25 in-package smoke checks and 56 real-interface regressions, and completed a real send/receive on Sepolia. v0.3.10 keeps its 25 wallet regression tests, six-language static coverage check, and real two-node ERC-20 issuance/transfer and contract deploy/read-write verification.</span></li>
+          <li><span class="zh">个人多链保险库独立加密：scrypt(N=131072, r=8, p=1) 派生 + AES-256-GCM + 固定 AAD，密码错误时认证失败直接拒绝；私钥只在内存中解出，不写入日志、不随请求外发。</span><span class="en">The personal multichain vault is separately encrypted with scrypt(N=131072, r=8, p=1) and AES-256-GCM under a fixed AAD; a wrong password fails authentication and is rejected. Private keys are only decrypted in memory — never logged, never sent out.</span></li>
         </ul>
       </div>
       <div>
@@ -195,7 +239,8 @@
             <li><span class="zh">未完成更多实体电脑、不同网络环境下的长期同步与故障恢复验证。</span><span class="en">Long-run sync and failure recovery across more physical machines and networks is unverified.</span></li>
             <li><span class="zh">未完成深度链重组、节点隔离、长期难度变化和异常时间戳的充分模拟。</span><span class="en">Deep reorgs, node isolation, long-term difficulty drift and abnormal timestamps are not adequately simulated.</span></li>
             <li><span class="zh">未建立私密漏洞接收渠道或漏洞赏金计划。</span><span class="en">No private vulnerability disclosure channel or bug bounty.</span></li>
-            <li><span class="zh">Solidity 编辑器与内置合约模板未经独立智能合约安全审计。DEX、跨链桥、WalletConnect、ENS 与 NFT 图形化管理不在 v0.3.10 范围内。</span><span class="en">The Solidity editor and bundled contract templates are not independently audited. DEX, bridges, WalletConnect, ENS and NFT asset management are out of scope for v0.3.10.</span></li>
+            <li><span class="zh">Solidity 编辑器与内置合约模板未经独立智能合约安全审计。DEX、跨链桥、WalletConnect、ENS 与 NFT 图形化管理不在 v0.4.0 范围内。个人多链只做收付，不含兑换、跨链桥与代币授权管理。</span><span class="en">The Solidity editor and bundled contract templates are not independently audited. DEX, bridges, WalletConnect, ENS and NFT asset management are out of scope for v0.4.0. The personal multichain wallet is send/receive only — no swaps, bridges or token approval management.</span></li>
+            <li><span class="zh">个人多链依赖第三方公共节点（Blockstream、BlockCypher、PublicNode）。节点故障、限流或被篡改的返回值可能让余额显示错误；本版未实现多节点交叉校验。</span><span class="en">The personal multichain wallet relies on third-party public nodes (Blockstream, BlockCypher, PublicNode). Node outages, rate limits or tampered responses can misreport balances; cross-checking across multiple nodes is not implemented.</span></li>
             <li><span class="zh">构建依赖仍有 1 条 <code>sprintf-js</code> 中危记录，当前依赖链没有可直接升级的已修复版本。</span><span class="en">Build dependencies still carry one medium <code>sprintf-js</code> advisory with no directly upgradable fixed version in the current dependency chain.</span></li>
           </ul>
         </div>
@@ -209,7 +254,7 @@
   </div>
 </section>
 
-<section class="band" id="download">
+<section class="band band-alt" id="download">
   <div class="wrap">
     <h2><span class="zh">下载</span><span class="en">Download</span></h2>
     <p class="section-lede"><span class="zh">安装包直接托管在 GitHub Releases，本站不中转任何二进制文件。下载后请用同一页面的 <code>.sha256</code> 文件核对。</span><span class="en">Installers are hosted on GitHub Releases only — this site never mirrors binaries. Verify each download against its <code>.sha256</code> file on the same page.</span></p>
@@ -217,18 +262,18 @@
       <article class="dl-card">
         <div class="dl-head">
           <h3>Windows x64</h3>
-          <span class="badge badge-gold">v0.3.10</span>
+          <span class="badge badge-gold">v0.4.0</span>
         </div>
-        <p class="dl-meta"><span class="zh">绿色压缩包，约 191 MB · 完整解压后运行 <code>NIU Wallet.exe</code>，不要只复制单个 EXE。</span><span class="en">Portable ZIP, about 191 MB · extract the whole archive and run <code>NIU Wallet.exe</code>; do not copy a single EXE.</span></p>
+        <p class="dl-meta"><span class="zh">绿色压缩包，约 199 MB · 含个人多链收发（BTC / DOGE / ETH / USDT / USDC + 两个测试网）。完整解压后运行 <code>NIU Wallet.exe</code>，不要只复制单个 EXE。左下角显示 <code>版本 0.4.0</code> 才算新版。</span><span class="en">Portable ZIP, about 199 MB · includes the personal multichain wallet (BTC / DOGE / ETH / USDT / USDC plus two testnets). Extract the whole archive and run <code>NIU Wallet.exe</code>; do not copy a single EXE. The bottom-left corner must read <code>版本 0.4.0</code>.</span></p>
         <div class="alert alert-warn alert-sm">
-          <p><span class="zh">未做商业代码签名。首次运行 Windows SmartScreen 可能提示「未知发布者」。</span><span class="en">Not commercially code-signed. SmartScreen may warn "unknown publisher" on first run.</span></p>
+          <p><span class="zh">未做商业代码签名。首次运行 Windows SmartScreen 可能提示「未知发布者」。如果打开后侧栏没有「个人多链」，说明旧版还在运行 —— 先在任务管理器结束所有 <code>NIU Wallet.exe</code> 再重开。</span><span class="en">Not commercially code-signed. SmartScreen may warn "unknown publisher" on first run. If the sidebar has no personal multichain entry, an older build is still running — end every <code>NIU Wallet.exe</code> in Task Manager and reopen.</span></p>
         </div>
-        <a class="btn btn-primary btn-block" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-Windows-x64.zip" rel="noopener"><span class="zh">下载 ZIP</span><span class="en">Download ZIP</span></a>
+        <a class="btn btn-primary btn-block" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.4.0/NIU-Wallet-0.4.0-win-x64.zip" rel="noopener"><span class="zh">下载 ZIP</span><span class="en">Download ZIP</span></a>
         <div class="hash">
           <span class="hash-label">SHA-256</span>
-          <button class="copy copy-hash" data-copy="a7cb7cb8afda088b1e520ecd9f5693c13aa69ed254726e19a10c6d5886c74c61">a7cb7cb8…86c74c61</button>
+          <button class="copy copy-hash" data-copy="00472e0482574f35a37bc8bdf96ae6128d0a63896fba1da0a60edeee1aadf504">00472e04…1aadf504</button>
         </div>
-        <a class="txtlink" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.3.10/NIU-Wallet-v0.3.10-Windows-x64.zip.sha256" rel="noopener"><span class="zh">下载校验文件</span><span class="en">Get checksum file</span></a>
+        <a class="txtlink" href="https://github.com/yuanhong792/niu-wallet/releases/download/v0.4.0/NIU-Wallet-0.4.0-win-x64.zip.sha256" rel="noopener"><span class="zh">下载校验文件</span><span class="en">Get checksum file</span></a>
       </article>
 
       <article class="dl-card">
@@ -236,7 +281,7 @@
           <h3>macOS <span class="zh">Apple Silicon</span><span class="en">Apple Silicon</span></h3>
           <span class="badge badge-gold">v0.3.10</span>
         </div>
-        <p class="dl-meta"><span class="zh">DMG 约 178 MB · 仅支持 Apple Silicon（arm64），拖入「应用程序」安装。</span><span class="en">DMG about 178 MB · Apple Silicon (arm64) only. Drag to Applications.</span></p>
+        <p class="dl-meta"><span class="zh">DMG 约 178 MB · 仅支持 Apple Silicon（arm64），拖入「应用程序」安装。macOS 版仍停留在 v0.3.10，暂不含个人多链收发。</span><span class="en">DMG about 178 MB · Apple Silicon (arm64) only. Drag to Applications. The macOS build is still v0.3.10 and does not yet include the personal multichain wallet.</span></p>
         <div class="alert alert-warn alert-sm">
           <p><span class="zh">仅临时签名（ad-hoc），未使用 Apple Developer ID，未完成 Apple 公证。首次启动若被拦截，请在 Finder 中右键应用并选择「打开」。</span><span class="en">Ad-hoc signed only — no Apple Developer ID, no notarization. If macOS blocks first launch, right-click the app in Finder and choose Open.</span></p>
         </div>
@@ -269,7 +314,7 @@
     <details class="verify">
       <summary><span class="zh">如何核对 SHA-256</span><span class="en">How to verify SHA-256</span></summary>
       <p class="fine"><span class="zh">Windows PowerShell：</span><span class="en">Windows PowerShell:</span></p>
-      <pre><code>Get-FileHash .\NIU-Wallet-v0.3.10-Windows-x64.zip -Algorithm SHA256</code></pre>
+      <pre><code>Get-FileHash .\NIU-Wallet-0.4.0-win-x64.zip -Algorithm SHA256</code></pre>
       <p class="fine"><span class="zh">macOS / Linux 终端：</span><span class="en">macOS / Linux terminal:</span></p>
       <pre><code>shasum -a 256 NIU-Wallet-v0.3.10-macOS-arm64.dmg</code></pre>
       <p class="fine"><span class="zh">安卓 APK（Windows PowerShell 用 <code>Get-FileHash .\NIU-Wallet-Mobile-0.1.9.apk -Algorithm SHA256</code>）：</span><span class="en">Android APK (on Windows PowerShell use <code>Get-FileHash .\NIU-Wallet-Mobile-0.1.9.apk -Algorithm SHA256</code>):</span></p>
@@ -277,11 +322,11 @@
       <p class="fine"><span class="zh">输出应与上方哈希一致。macOS 校验文件中的路径前缀为 <code>dist-desktop/</code>，属发布脚本产物，文件名部分一致即可。</span><span class="en">The output must match the hash above. The macOS checksum file carries a <code>dist-desktop/</code> path prefix from the release script; match it by filename.</span></p>
     </details>
 
-    <p class="fine"><span class="zh">历史版本与完整发布说明见 <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases 页面</a>（桌面 v0.3.9 · v0.3.8 · v0.3.10；安卓 <code>android-v0.1.9</code>）。</span><span class="en">Older builds and full release notes are on the <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases page</a> (desktop v0.3.8 · v0.3.9 · v0.3.10; Android <code>android-v0.1.9</code>).</span></p>
+    <p class="fine"><span class="zh">历史版本与完整发布说明见 <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases 页面</a>（桌面 v0.4.0 · v0.3.10 · v0.3.9 · v0.3.8；安卓 <code>android-v0.1.9</code>）。</span><span class="en">Older builds and full release notes are on the <a href="https://github.com/yuanhong792/niu-wallet/releases" rel="noopener">Releases page</a> (desktop v0.4.0 · v0.3.10 · v0.3.9 · v0.3.8; Android <code>android-v0.1.9</code>).</span></p>
   </div>
 </section>
 
-<section class="band band-alt" id="source">
+<section class="band" id="source">
   <div class="wrap">
     <h2><span class="zh">源码与文档</span><span class="en">Source and docs</span></h2>
     <div class="grid grid-2">
@@ -294,6 +339,7 @@
       </div>
       <ul class="doclist">
         <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/README.md" rel="noopener"><span class="zh">README · 安装与功能说明</span><span class="en">README · install and features</span></a></li>
+        <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/docs/%E4%B8%AA%E4%BA%BA%E5%A4%9A%E9%93%BE%E6%94%B6%E5%8F%91%E7%89%88.md" rel="noopener"><span class="zh">个人多链收发版 · 使用说明与测试网指引</span><span class="en">Personal multichain · usage and testnet guide</span></a></li>
         <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/SECURITY.md" rel="noopener"><span class="zh">SECURITY · 安全状态与发布限制</span><span class="en">SECURITY · status and release limits</span></a></li>
         <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/docs/%E7%89%9B%E9%93%BENIU%E7%99%BD%E7%9A%AE%E4%B9%A6V3.0.md" rel="noopener"><span class="zh">牛链 NIU 白皮书 V3.0</span><span class="en">NIU technical whitepaper V3.0</span></a></li>
         <li><a href="https://github.com/yuanhong792/niu-wallet/blob/main/docs/%E7%89%9B%E9%93%BENIU%E7%99%BD%E7%9A%AE%E4%B9%A6V2.0.md" rel="noopener"><span class="zh">牛链 NIU 技术白皮书 V2.0</span><span class="en">NIU technical whitepaper V2.0</span></a></li>
@@ -303,7 +349,7 @@
   </div>
 </section>
 
-<section class="band">
+<section class="band band-alt">
   <div class="wrap">
     <h2><span class="zh">风险提示</span><span class="en">Risk disclosure</span></h2>
     <div class="alert alert-danger">
@@ -311,6 +357,8 @@
         <li><span class="zh">牛币（NIU）是个人开源项目的实验性代币，由本机挖矿产生。项目方不作任何价值、收益或价格承诺，不承诺上架任何交易所。</span><span class="en">NIU is an experimental token from an individual open-source project, produced by local mining. The author makes no promise of value, return or price, and no promise of any exchange listing.</span></li>
         <li><span class="zh">本项目未经独立第三方安全审计，源代码、自动化测试和依赖扫描均不构成安全背书。</span><span class="en">This project is not independently audited. Source code, automated tests and dependency scans do not constitute security assurance.</span></li>
         <li><span class="zh">私钥一旦丢失或备份密码遗忘，资产无法找回。项目方无法为你找回任何密码或私钥。</span><span class="en">If a private key is lost or a backup password forgotten, the funds cannot be recovered. No one on this project can restore a password or key for you.</span></li>
+        <li><span class="zh">个人多链收发依赖第三方公共节点查询余额与广播交易，节点返回错误或被限流时可能显示错误余额或发送失败；转出前请先核对地址与金额，主网转账一旦广播不可撤回。</span><span class="en">The personal multichain wallet relies on third-party public nodes to read balances and broadcast transactions. Wrong responses or rate limits can misreport balances or fail a send; check address and amount before sending, because mainnet transactions cannot be recalled once broadcast.</span></li>
+        <li><span class="zh">测试网（Bitcoin testnet、Sepolia）的代币没有价值，不能转到主网，也不能兑换成任何真实资产。</span><span class="en">Testnet coins (Bitcoin testnet, Sepolia) have no value, cannot be moved to mainnet and cannot be exchanged for anything real.</span></li>
         <li><span class="zh">挖矿会占用本机算力与电力，并可能影响设备寿命；请在了解本地法规与税务要求后自行判断。</span><span class="en">Mining consumes local compute and electricity and may affect hardware life. Judge local legal and tax requirements yourself.</span></li>
         <li><span class="zh">本页面不是投资要约，不构成任何投资建议。</span><span class="en">This page is not an offer, and nothing here is investment advice.</span></li>
       </ul>
@@ -341,6 +389,7 @@
       <h4><span class="zh">页面</span><span class="en">On this page</span></h4>
       <ul>
         <li><a href="#features"><span class="zh">当前功能</span><span class="en">Features</span></a></li>
+        <li><a href="#multichain"><span class="zh">个人多链</span><span class="en">Multichain</span></a></li>
         <li><a href="#network"><span class="zh">网络参数</span><span class="en">Network</span></a></li>
         <li><a href="#security"><span class="zh">安全状态</span><span class="en">Security status</span></a></li>
         <li><a href="#download"><span class="zh">下载与校验</span><span class="en">Download</span></a></li>

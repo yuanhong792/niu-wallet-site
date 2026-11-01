@@ -4,10 +4,10 @@
   var btn = document.getElementById("langBtn");
 
   var titles = {
-    "zh-CN": ["牛币钱包 NIU Wallet · 牛链桌面钱包、安卓钱包与独立链源码",
-      "牛链（NIU）钱包：Windows x64、macOS Apple Silicon 桌面版与安卓手机版接入同一条网络。Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。"],
-    "en": ["NIU Wallet · Desktop and Android wallet plus standalone chain source for the NIU network",
-      "NIU wallets for Windows x64, macOS Apple Silicon and Android on one network. Standalone Ethash PoW + London EVM chain, source open under GPL-3.0. Not independently audited."]
+    "zh-CN": ["牛币钱包 NIU Wallet v0.4.0 · 个人多链收发与牛链独立链源码",
+      "牛币钱包 v0.4.0：新增个人多链收发（BTC、DOGE、ETH、USDT、USDC 与 BTC 测试网、Sepolia）。Windows x64、macOS Apple Silicon 与安卓手机版接入同一条 Ethash PoW + London EVM 独立链，源码以 GPL-3.0 开放。当前版本未经独立第三方安全审计。"],
+    "en": ["NIU Wallet v0.4.0 · personal multichain wallet plus standalone chain source",
+      "NIU Wallet v0.4.0 adds a personal multichain wallet (BTC, DOGE, ETH, USDT, USDC plus BTC testnet and Sepolia). Windows x64, macOS Apple Silicon and Android on one standalone Ethash PoW + London EVM chain, source open under GPL-3.0. Not independently audited."]
   };
 
   function apply(lang) {

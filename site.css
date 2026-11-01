@@ -144,6 +144,7 @@ ul{padding-left:20px;margin:0}
 .alert p:last-child{margin-bottom:0}
 .alert ul{margin:0}
 .alert-warn{background:#fdf6e7;border-color:#f0dcae;color:#6b4405}
+.alert-ok{background:#f2f8f1;border-color:#cfe4c9;color:#2c5227}
 .alert-danger{background:#fdf0f0;border-color:#f0cdc9;color:#6d1f1f}
 .alert-sm{padding:12px 14px;font-size:13.5px;margin-bottom:14px}
 .alert strong{display:block;margin-bottom:5px}
